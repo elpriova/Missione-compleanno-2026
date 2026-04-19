@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Missione Compleanno</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 🎬 SCHERMATA INTRO (DEVE STARE PER PRIMA) -->
+<div id="intro">
+  <h1>🎮 MISSIONE COMPLEANNO</h1>
+  <p>Trova tutte le lettere per completare la frase</p>
+  <button id="startBtn">START</button>
+</div>
+
+<!-- 🎮 GIOCO -->
+<div id="gameboy">
+
+  <!-- 🖥 SCHERMO -->
+  <div id="screen">
+    <canvas id="game"></canvas>
+    <div id="phrase">_ _ _ _ _ _ _ _ _ _</div>
+  </div>
+
+  <!-- 🎮 CONTROLLI -->
+  <div id="controls-area">
+
+    <!-- ➕ D-PAD -->
+    <div id="dpad">
+      <button id="up"></button>
+      <button id="left"></button>
+      <button id="center"></button>
+      <button id="right"></button>
+      <button id="down"></button>
+    </div>
+
+    <!-- 🔴 A / B -->
+    <div id="ab-buttons">
+      <button id="bBtn">B</button>
+      <button id="aBtn">A</button>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- 🎮 SCRIPT -->
+<script src="script.js"></script>
+
+</body>
+</html>
