@@ -1,19 +1,11 @@
-/* ===================== */
-/* RESET */
-/* ===================== */
-
-* {
-  box-sizing: border-box;
-}
-
 html, body {
   margin: 0;
   padding: 0;
   background: #2c2c2c;
   font-family: monospace;
 
+  width: 100%;
   height: 100%;
-  overflow: hidden;
 
   display: flex;
   justify-content: center;
@@ -23,93 +15,78 @@ html, body {
 /* ===================== */
 /* CONSOLE */
 /* ===================== */
-
 #gameboy {
   background: #d6d6d6;
   border: 6px solid #999;
   border-radius: 20px;
 
-  padding: 14px;
+  padding: 16px;
+  box-sizing: border-box;
 
-  width: 420px;
-  max-width: 95vw;
+  width: min(420px, 95vw);
 
   display: flex;
   flex-direction: column;
-  gap: 12px;
+
+  gap: 10px;
 }
 
 /* ===================== */
-/* SCHERMO (PROPORZIONALE) */
+/* SCHERMO */
 /* ===================== */
-
 #screen {
   background: #9bbc0f;
   border: 6px solid #444;
 
   width: 100%;
 
-  /* 🔥 CHIAVE: rapporto fisso */
-  aspect-ratio: 1 / 1;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 
   overflow: hidden;
-  position: relative;
+
+  aspect-ratio: 1 / 1; /* 🔥 chiave: sempre quadrato */
 }
 
 /* ===================== */
-/* CANVAS (NO DEFORMAZIONE) */
+/* CANVAS */
 /* ===================== */
-
 canvas {
   width: 100%;
   height: 100%;
 
-  display: block;
-
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 
-  touch-action: none;
+  display: block;
 }
 
 /* ===================== */
-/* FRASE */
+/* TESTO */
 /* ===================== */
-
 #phrase {
-  margin-top: 6px;
   font-size: 14px;
   color: #222;
-
-  position: absolute;
-  bottom: 6px;
+  text-align: center;
 }
 
 /* ===================== */
 /* CONTROLLI */
 /* ===================== */
-
 #controls-area {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  flex-shrink: 0;
+  width: 100%;
 }
 
-/* ===================== */
 /* D-PAD */
-/* ===================== */
-
 #dpad {
   display: grid;
-  grid-template-columns: repeat(3, 50px);
-  grid-template-rows: repeat(3, 50px);
+  grid-template-columns: repeat(3, 48px);
+  grid-template-rows: repeat(3, 48px);
 }
 
 #dpad button {
@@ -128,10 +105,7 @@ canvas {
   transform: translateY(2px);
 }
 
-/* ===================== */
 /* A / B */
-/* ===================== */
-
 #ab-buttons {
   display: flex;
   gap: 16px;
@@ -149,76 +123,43 @@ canvas {
 
   font-weight: bold;
   font-size: 18px;
-
-  cursor: pointer;
-}
-
-#ab-buttons button:active {
-  transform: translateY(2px);
 }
 
 /* ===================== */
-/* INTRO */
+/* MOBILE */
 /* ===================== */
-
-#intro {
-  position: fixed;
-  inset: 0;
-
-  background: black;
-  color: white;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  z-index: 99999;
-  text-align: center;
-}
-
-#intro h1 {
-  font-size: 22px;
-  margin-bottom: 10px;
-}
-
-#intro button {
-  margin-top: 20px;
-  padding: 10px 20px;
-
-  font-size: 16px;
-  font-weight: bold;
-
-  border: none;
-  cursor: pointer;
-
-  background: white;
-  color: black;
-}
-
-/* ===================== */
-/* MOBILE (IMPORTANTISSIMO) */
-/* ===================== */
-
 @media (max-width: 768px) {
 
+  html, body {
+    align-items: flex-start;
+  }
+
   #gameboy {
+    height: 100vh;
     width: 100vw;
-    height: 100dvh;
 
     border-radius: 0;
     border: none;
 
-    justify-content: space-between;
+    padding: 10px;
+  }
+
+  #screen {
+    flex: 1;
+    aspect-ratio: 1 / 1; /* sempre quadrato anche mobile */
+  }
+
+  #controls-area {
+    margin-top: auto;
   }
 
   #dpad button {
-    width: 55px;
-    height: 55px;
+    width: 52px;
+    height: 52px;
   }
 
   #ab-buttons button {
-    width: 65px;
-    height: 65px;
+    width: 64px;
+    height: 64px;
   }
 }
