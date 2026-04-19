@@ -70,12 +70,11 @@ html, body {
 
   gap: 8px;
 
-  /* IMPORTANTISSIMO: evita schiacciamenti */
   flex-shrink: 0;
 }
 
 /* =========================
-   CANVAS (PIXEL PERFECT)
+   CANVAS
 ========================= */
 canvas {
   width: min(320px, 80vw);
@@ -120,7 +119,6 @@ canvas {
   grid-template-rows: repeat(3, 46px);
 }
 
-/* bottoni base */
 #dpad button {
   background: #444;
   border: 3px solid #222;
@@ -169,11 +167,13 @@ canvas {
 }
 
 /* =========================
-   DESKTOP (CENTRATO PERFETTO)
+   DESKTOP
 ========================= */
 @media (min-width: 769px) {
   body {
     overflow: hidden;
+    align-items: center;
+    justify-content: center;
   }
 
   #gameboy {
@@ -182,12 +182,13 @@ canvas {
 }
 
 /* =========================
-   MOBILE (GAME BOY IN MANO)
+   MOBILE (FIX GAME BOY IN HAND)
 ========================= */
 @media (max-width: 768px) {
 
   body {
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     padding: 10px;
     overflow: hidden;
   }
@@ -195,8 +196,6 @@ canvas {
   #gameboy {
     width: 100%;
     max-width: 420px;
-
-    height: auto;
 
     border-radius: 16px;
   }
