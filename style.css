@@ -178,10 +178,16 @@ canvas {
 ========================= */
 @media (max-width: 768px) {
 
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+
   body {
     align-items: stretch;
   }
 
+  /* 🎮 CONSOLE: occupa tutto lo schermo */
   #gameboy {
     width: 100vw;
     height: 100vh;
@@ -189,26 +195,42 @@ canvas {
     border-radius: 0;
     border: none;
 
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
   }
 
+  /* 🖥 SCHERMO: cresce e resta centrato */
   #screen {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+
+    padding: 6px;
   }
 
+  /* 🎮 CANVAS PIÙ GRANDE (QUI RISOLVI IL PROBLEMA) */
   canvas {
-    width: min(90vw, 320px);
-    height: min(90vw, 320px);
+    width: min(92vw, 420px);
+    height: min(92vw, 420px);
+  }
+
+  /* 🎮 CONTROLLI PIÙ COMODI */
+  #controls-area {
+    margin-top: 8px;
   }
 
   #dpad button {
-    width: 55px;
-    height: 55px;
+    width: 58px;
+    height: 58px;
   }
 
   #ab-buttons button {
-    width: 65px;
-    height: 65px;
+    width: 70px;
+    height: 70px;
   }
 }
