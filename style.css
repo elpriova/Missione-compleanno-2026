@@ -176,36 +176,74 @@ canvas {
    MOBILE (GAME BOY IN MANO)
 ========================= */
 
+
 @media (max-width: 768px) {
 
   html, body {
     height: 100%;
     overflow: hidden;
+
+    /* importantissimo su mobile */
+    align-items: stretch;
   }
+
+  /* =========================
+     CONSOLE
+  ========================= */
 
   #gameboy {
     width: 100vw;
-    height: 100vh;
+
+    /* 🔥 CHIAVE: evita schiacciamento da viewport mobile */
+    height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    padding: 10px;
 
     border-radius: 0;
     border: none;
-
-    padding: 12px;
-
-    justify-content: space-between;
   }
+
+  /* =========================
+     SCHERMO
+  ========================= */
 
   #screen {
     flex: 1;
+
+    /* 🔥 mantiene proporzione stabile */
+    aspect-ratio: 1 / 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  canvas {
+    width: min(92vw, 360px);
+    height: auto;
+  }
+
+  /* =========================
+     CONTROLLI
+  ========================= */
+
+  #controls-area {
+    flex-shrink: 0;
+    padding-bottom: env(safe-area-inset-bottom);
   }
 
   #dpad {
-    grid-template-columns: repeat(3, 48px);
-    grid-template-rows: repeat(3, 48px);
+    grid-template-columns: repeat(3, 52px);
+    grid-template-rows: repeat(3, 52px);
   }
 
   #ab-buttons button {
-    width: 64px;
-    height: 64px;
+    width: 70px;
+    height: 70px;
   }
 }
