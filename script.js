@@ -74,7 +74,7 @@ let phrase = Array(target.length).fill("_");
 // =====================
 const COLORS = {
   ground: "#dcdcdc",
-  grass: "#7fcf4a",
+  grass: "#368600",
   trunk: "#5b5b5b",
   leaf: "#7a8f7a"
 };
