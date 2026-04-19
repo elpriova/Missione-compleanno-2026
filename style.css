@@ -179,9 +179,13 @@ canvas {
 @media (max-width: 768px) {
 
   html, body {
-    height: 100%;
     margin: 0;
+    padding: 0;
+
+    height: 100%;
     overflow: hidden;
+
+    background: #2c2c2c;
   }
 
   body {
@@ -190,27 +194,29 @@ canvas {
     align-items: center;
   }
 
-  /* 🎮 CONSOLE CONTENUTA (NON PIÙ 100vh) */
+  /* 🎮 CONSOLE: NON PIÙ 100vh */
   #gameboy {
     width: 100vw;
-    height: 100dvh;
 
-    max-height: 100dvh;
-
-    border-radius: 0;
-    border: none;
-
-    padding: 8px;
+    /* 🔥 QUESTO È IL TRUCCO VERO */
+    max-height: 100%;
 
     display: flex;
     flex-direction: column;
 
-    justify-content: space-between;
+    padding: 8px;
+    gap: 8px;
+
+    border-radius: 0;
+    border: none;
+
+    overflow: hidden;
   }
 
-  /* 🖥 SCHERMO PIÙ STABILE */
+  /* 🖥 SCHERMO OCCUPA SPAZIO FLUIDO */
   #screen {
-    flex: 1;
+    flex: 1 1 auto;
+
     min-height: 0;
 
     display: flex;
@@ -220,27 +226,30 @@ canvas {
     padding: 4px;
   }
 
-  /* 🎮 CANVAS = NON ESCE MAI */
+  /* 🎮 CANVAS: SI ADATTA SENZA SPINGERE GIÙ */
   canvas {
-    width: min(90vw, 360px);
-    height: min(90vw, 360px);
+    width: min(92vw, 340px);
+    height: min(92vw, 340px);
 
-    max-height: 60vh;
+    max-height: 100%;
   }
 
-  /* 🎮 CONTROLLI RIDOTTI LEGGERMENTE */
+  /* 🎮 CONTROLLI NON DEVONO ESPANDERE LAYOUT */
   #controls-area {
-    flex-shrink: 0;
-    margin-top: 6px;
+    flex: 0 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   #dpad button {
-    width: 52px;
-    height: 52px;
+    width: 50px;
+    height: 50px;
   }
 
   #ab-buttons button {
-    width: 60px;
-    height: 60px;
+    width: 58px;
+    height: 58px;
   }
 }
