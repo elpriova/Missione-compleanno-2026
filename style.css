@@ -1,115 +1,159 @@
+/* =========================
+   RESET BASE
+========================= */
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
   background: #2c2c2c;
   font-family: monospace;
-
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   overflow: hidden;
 }
 
-/* ===================== */
-/* INTRO (FIX SICURO) */
-/* ===================== */
+/* =========================
+   INTRO SCREEN (START)
+========================= */
 #intro {
   position: fixed;
   inset: 0;
   background: black;
   color: white;
+  z-index: 9999;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  z-index: 99999;
+  text-align: center;
 }
 
-/* ===================== */
-/* GAMEBOY WRAPPER */
-/* ===================== */
+#intro h1 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+#intro button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+
+  border: none;
+  cursor: pointer;
+  background: white;
+  color: black;
+  font-weight: bold;
+}
+
+/* =========================
+   CENTRATURA DESKTOP
+========================= */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =========================
+   GAMEBOY CONTAINER
+========================= */
 #gameboy {
   background: #d6d6d6;
   border: 6px solid #999;
   border-radius: 20px;
 
-  padding: 12px;
-  box-sizing: border-box;
-
-  width: min(420px, 95vw);
+  padding: 16px;
 
   display: flex;
   flex-direction: column;
+  gap: 12px;
 
-  gap: 10px;
+  width: min(420px, 95vw);
 }
 
-/* ===================== */
-/* SCHERMO PERFETTO */
-/* ===================== */
+/* =========================
+   SCHERMO
+========================= */
 #screen {
   background: #9bbc0f;
   border: 6px solid #444;
 
-  width: 100%;
-
-  aspect-ratio: 1 / 1;
+  padding: 10px;
 
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  gap: 8px;
 
   overflow: hidden;
 }
 
-/* ===================== */
-/* CANVAS NON DEFORMATO */
-/* ===================== */
+/* =========================
+   CANVAS PERFETTO
+========================= */
 canvas {
   width: 100%;
-  height: 100%;
+  max-width: 360px;
+  aspect-ratio: 1 / 1;
 
   image-rendering: pixelated;
   display: block;
 }
 
-/* ===================== */
-/* TESTO */
-/* ===================== */
+/* =========================
+   TESTO
+========================= */
 #phrase {
   font-size: 14px;
-  text-align: center;
   color: #222;
+  letter-spacing: 2px;
+  text-align: center;
 }
 
-/* ===================== */
-/* CONTROLLI */
-/* ===================== */
+/* =========================
+   CONTROLLI
+========================= */
 #controls-area {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* D-PAD */
+/* =========================
+   D-PAD (CROCE STABILE)
+========================= */
 #dpad {
   display: grid;
-  grid-template-columns: repeat(3, 48px);
-  grid-template-rows: repeat(3, 48px);
+  grid-template-columns: 50px 50px 50px;
+  grid-template-rows: 50px 50px 50px;
 }
 
 #dpad button {
+  width: 50px;
+  height: 50px;
+
   background: #444;
   border: 3px solid #222;
+  cursor: pointer;
 }
 
-/* A/B */
+#up    { grid-column: 2; grid-row: 1; }
+#left  { grid-column: 1; grid-row: 2; }
+#center{ grid-column: 2; grid-row: 2; background: #333; }
+#right { grid-column: 3; grid-row: 2; }
+#down  { grid-column: 2; grid-row: 3; }
+
+#dpad button:active {
+  transform: translateY(2px);
+}
+
+/* =========================
+   A / B
+========================= */
 #ab-buttons {
   display: flex;
   gap: 14px;
@@ -124,16 +168,18 @@ canvas {
 
   background: #c1121f;
   color: white;
+
+  font-weight: bold;
+  font-size: 18px;
 }
 
-/* ===================== */
-/* MOBILE FIX DEFINITIVO */
-/* ===================== */
+/* =========================
+   MOBILE (EFFETTO GAME BOY)
+========================= */
 @media (max-width: 768px) {
 
-  html, body {
-    align-items: center;
-    justify-content: center;
+  body {
+    align-items: stretch;
   }
 
   #gameboy {
@@ -143,14 +189,26 @@ canvas {
     border-radius: 0;
     border: none;
 
-    padding: 10px;
+    justify-content: space-between;
   }
 
   #screen {
     flex: 1;
+    justify-content: center;
   }
 
-  #controls-area {
-    margin-top: auto;
+  canvas {
+    width: min(90vw, 320px);
+    height: min(90vw, 320px);
+  }
+
+  #dpad button {
+    width: 55px;
+    height: 55px;
+  }
+
+  #ab-buttons button {
+    width: 65px;
+    height: 65px;
   }
 }
