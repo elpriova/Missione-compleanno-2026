@@ -1,6 +1,7 @@
 /* =========================
-   RESET BASE
+   BASE
 ========================= */
+
 * {
   box-sizing: border-box;
 }
@@ -11,136 +12,119 @@ html, body {
   height: 100%;
   background: #2c2c2c;
   font-family: monospace;
-  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* =========================
-   INTRO SCREEN (START)
+   INTRO (SCHERMATA START)
 ========================= */
+
 #intro {
   position: fixed;
   inset: 0;
   background: black;
   color: white;
-  z-index: 9999;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  text-align: center;
-}
-
-#intro h1 {
-  font-size: 22px;
-  margin-bottom: 10px;
-}
-
-#intro button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-
-  border: none;
-  cursor: pointer;
-  background: white;
-  color: black;
-  font-weight: bold;
+  z-index: 9999;
 }
 
 /* =========================
-   CENTRATURA DESKTOP
+   CONSOLE GAME BOY
 ========================= */
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-/* =========================
-   GAMEBOY CONTAINER
-========================= */
 #gameboy {
   background: #d6d6d6;
   border: 6px solid #999;
-  border-radius: 20px;
+  border-radius: 22px;
 
-  padding: 16px;
+  padding: 14px;
+
+  width: min(420px, 92vw);
 
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
 
-  width: min(420px, 95vw);
+  gap: 12px;
 }
 
 /* =========================
    SCHERMO
 ========================= */
+
 #screen {
   background: #9bbc0f;
   border: 6px solid #444;
 
-  padding: 10px;
+  width: 100%;
+
+  /* 🔥 QUESTO EVITA DEFORMAZIONI */
+  aspect-ratio: 10 / 9;
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
 
+  padding: 8px;
   overflow: hidden;
 }
 
-/* =========================
-   CANVAS PERFETTO
-========================= */
+/* canvas sempre proporzionato */
 canvas {
   width: 100%;
-  max-width: 360px;
-  aspect-ratio: 1 / 1;
+  height: auto;
 
   image-rendering: pixelated;
+  image-rendering: crisp-edges;
+
   display: block;
 }
 
-/* =========================
-   TESTO
-========================= */
+/* frase sotto canvas */
 #phrase {
+  margin-top: 6px;
   font-size: 14px;
   color: #222;
-  letter-spacing: 2px;
   text-align: center;
 }
 
 /* =========================
    CONTROLLI
 ========================= */
+
 #controls-area {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  gap: 10px;
 }
 
-/* =========================
-   D-PAD (CROCE STABILE)
-========================= */
+/* D-PAD */
 #dpad {
   display: grid;
-  grid-template-columns: 50px 50px 50px;
-  grid-template-rows: 50px 50px 50px;
+  grid-template-columns: repeat(3, 42px);
+  grid-template-rows: repeat(3, 42px);
 }
 
+/* bottoni base */
 #dpad button {
-  width: 50px;
-  height: 50px;
-
   background: #444;
   border: 3px solid #222;
   cursor: pointer;
 }
 
+/* croce */
 #up    { grid-column: 2; grid-row: 1; }
 #left  { grid-column: 1; grid-row: 2; }
 #center{ grid-column: 2; grid-row: 2; background: #333; }
@@ -151,17 +135,15 @@ canvas {
   transform: translateY(2px);
 }
 
-/* =========================
-   A / B
-========================= */
+/* A / B */
 #ab-buttons {
   display: flex;
   gap: 14px;
 }
 
 #ab-buttons button {
-  width: 60px;
-  height: 60px;
+  width: 58px;
+  height: 58px;
 
   border-radius: 50%;
   border: 4px solid #600;
@@ -171,85 +153,59 @@ canvas {
 
   font-weight: bold;
   font-size: 18px;
+
+  cursor: pointer;
+}
+
+#ab-buttons button:active {
+  transform: translateY(2px);
 }
 
 /* =========================
-   MOBILE (EFFETTO GAME BOY)
+   DESKTOP
 ========================= */
-@media (max-width: 768px) {
 
-  html, body {
-    margin: 0;
-    padding: 0;
-
-    height: 100%;
-    overflow: hidden;
-
-    background: #2c2c2c;
-  }
-
+@media (min-width: 769px) {
   body {
-    display: flex;
     justify-content: center;
     align-items: center;
   }
+}
 
-  /* 🎮 CONSOLE: NON PIÙ 100vh */
+/* =========================
+   MOBILE (GAME BOY IN MANO)
+========================= */
+
+@media (max-width: 768px) {
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+
   #gameboy {
     width: 100vw;
-
-    /* 🔥 QUESTO È IL TRUCCO VERO */
-    max-height: 100%;
-
-    display: flex;
-    flex-direction: column;
-
-    padding: 8px;
-    gap: 8px;
+    height: 100vh;
 
     border-radius: 0;
     border: none;
 
-    overflow: hidden;
-  }
+    padding: 12px;
 
-  /* 🖥 SCHERMO OCCUPA SPAZIO FLUIDO */
-  #screen {
-    flex: 1 1 auto;
-
-    min-height: 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 4px;
-  }
-
-  /* 🎮 CANVAS: SI ADATTA SENZA SPINGERE GIÙ */
-  canvas {
-    width: min(92vw, 340px);
-    height: min(92vw, 340px);
-
-    max-height: 100%;
-  }
-
-  /* 🎮 CONTROLLI NON DEVONO ESPANDERE LAYOUT */
-  #controls-area {
-    flex: 0 0 auto;
-
-    display: flex;
     justify-content: space-between;
-    align-items: center;
   }
 
-  #dpad button {
-    width: 50px;
-    height: 50px;
+  #screen {
+    flex: 1;
+  }
+
+  #dpad {
+    grid-template-columns: repeat(3, 48px);
+    grid-template-rows: repeat(3, 48px);
   }
 
   #ab-buttons button {
-    width: 58px;
-    height: 58px;
+    width: 64px;
+    height: 64px;
   }
 }
