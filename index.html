@@ -22,12 +22,19 @@
 <div id="gameboy">
 
   <!-- 🖥 SCHERMO -->
-  <div id="screen">
+ <div id="screen">
+
+  <div id="dialog-overlay" class="hidden">
+    <div id="dialog-box">
+      <div id="dialog-text"></div>
+    </div>
+  </div>
+
   <canvas id="game"></canvas>
-  <div id="phrase">_ _ _ _ _ _ _ _ _ _</div>
+
+  <div id="phrase">_ _ _ _ _</div>
+
 </div>
-
-
 
   <!-- 🎮 CONTROLLI -->
   <div id="controls-area">
@@ -49,6 +56,13 @@
 
   </div>
 
+</div>
+
+<!-- 💬 DIALOG OVERLAY -->
+<div id="dialog-overlay" class="hidden">
+  <div id="dialog-box">
+    <div id="dialog-text"></div>
+  </div>
 </div>
 
 <!-- 🎮 SCRIPT -->
