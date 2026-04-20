@@ -1,6 +1,38 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let dialogOverlay;
+let dialogText;
+document.addEventListener("DOMContentLoaded", () => {
+
+  dialogOverlay = document.getElementById("dialog-overlay");
+  dialogText = document.getElementById("dialog-text");
+
+  document.getElementById("startBtn").onclick = () => {
+
+    console.log("▶ START GAME");
+
+    document.getElementById("intro").style.display = "none";
+
+    gameStarted = false;
+    gameFinished = false;
+
+    startDialog();
+  };
+});
+
+const dialogues = [
+  "Eleonora: Ciao! Sei pronto per la Missione?",
+  "Muoviti con le frecce.",
+  "Raccogli tutte le lettere sparse nella mappa.",
+  "Premi A per raccogliere lettere vicine.",
+  "Premi B per vedere un aiuto.",
+  "Completa la frase per vincere!",
+  "Buona fortuna!"
+];
+
+let dialogIndex = 0;
+let typing = false;
 
 const TILE = 32;
 const SIZE = 10;
@@ -596,6 +628,89 @@ function showFinalText() {
 }
 
 // =====================
+// TYPE TEXT
+// =====================
+
+function typeText(text, callback) {
+
+  dialogText.innerHTML = "";
+  typing = true;
+
+  let i = 0;
+
+  const interval = setInterval(() => {
+
+    dialogText.innerHTML += text[i];
+    i++;
+
+    if (i >= text.length) {
+      clearInterval(interval);
+      typing = false;
+      callback && callback();
+    }
+
+  }, 25);
+}
+// =====================
+// DIALOG
+// =====================
+
+function startDialog() {
+
+  dialogOverlay.classList.remove("hidden");
+
+  canvas.style.display = "none";
+  document.getElementById("phrase").style.display = "none";
+
+  dialogIndex = 0;
+  showNextDialog();
+}
+
+function showNextDialog() {
+
+  if (dialogIndex >= dialogues.length) {
+    dialogOverlay.classList.add("hidden");
+    startGameAfterDialog();
+    return;
+  }
+
+  typeText(dialogues[dialogIndex], () => {
+    dialogIndex++;
+  });
+
+  dialogOverlay.onclick = () => {
+    if (!typing) {
+      showNextDialog();
+    }
+  };
+}
+
+    function enableDialogClick() {
+  dialogOverlay.onclick = () => {
+    if (!typing) showNextDialog();
+  };
+}
+
+
+function startGameAfterDialog() {
+
+  dialogOverlay.classList.add("hidden");
+
+  canvas.style.display = "block";
+  document.getElementById("phrase").style.display = "block";
+
+  gameStarted = true;
+  gameFinished = false;
+
+  player = { x: 5, y: 5 };
+
+  generateLetters();
+  startMusic();
+
+  requestAnimationFrame(loop);
+}
+
+// =====================
 // LOOP
 // =====================
 function loop() {
@@ -621,25 +736,18 @@ function loop() {
 // =====================
 // START
 // =====================
-document.getElementById("startBtn").onclick = () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-  console.log("▶ START GAME");
+  document.getElementById("startBtn").onclick = () => {
 
-  document.getElementById("intro").style.display = "none";
+    console.log("▶ START GAME");
 
-  gameStarted = true;
-  gameFinished = false;
+    document.getElementById("intro").style.display = "none";
 
-  player = { x: 5, y: 5 };
+    gameStarted = false;
+    gameFinished = false;
 
-  generateLetters();
+    startDialog();
+  };
 
-  startMusic();
-
-  // evita doppio loop
-  if (typeof loop === "function") {
-    requestAnimationFrame(loop);
-  } else {
-    console.error("LOOP NON DEFINITO");
-  }
-};
+});
