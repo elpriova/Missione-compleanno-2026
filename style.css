@@ -67,6 +67,7 @@ transform: translateZ(0);
    SCHERMO
 ========================= */
 #screen {
+  min-height: 360px;
   position: relative;
 
   background: #9bbc0f;
@@ -87,15 +88,18 @@ transform: translateZ(0);
 
 #dialog-overlay {
   position: absolute;
-  inset: 0;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
 
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 
-  padding-bottom: 8px;
+  padding-bottom: 12px;
 
-  z-index: 10;
+  z-index: 50;
 
   background: transparent;
 }
