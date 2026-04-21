@@ -14,7 +14,6 @@ html, body {
   justify-content: center;
   align-items: center;
 
-  overflow: hidden;
    @media (max-width: 768px) {
   html, body {
     overflow: visible;
