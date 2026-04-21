@@ -15,6 +15,9 @@ html, body {
   align-items: center;
 
   overflow: hidden;
+   @media (max-width: 768px) {
+  html, body {
+    overflow: visible;
 }
 
 /* =========================
@@ -211,6 +214,7 @@ canvas {
    MOBILE (FIX GAME BOY IN HAND)
 ========================= */
 @media (max-width: 768px) {
+
   body {
     display: flex;
     justify-content: center;
@@ -219,17 +223,16 @@ canvas {
     height: 100vh;
     margin: 0;
   }
-}
 
   #gameboy {
     width: 100%;
     max-width: 420px;
-
     border-radius: 16px;
   }
 
   canvas {
     width: min(92vw, 320px);
+    height: min(92vw, 320px);
   }
 
   #dpad {
@@ -242,7 +245,6 @@ canvas {
     height: 64px;
   }
 }
-
 
 /* BOX stile Pokémon */
 #dialog-box {
