@@ -212,10 +212,7 @@ canvas {
 ========================= */
 @media (max-width: 768px) {
   body {
-    overflow: hidden;
     height: 100vh;
-    position: fixed;
-    width: 100%;
   }
 }
 
