@@ -131,7 +131,7 @@ function startMusic() {
     osc.frequency.value = notes[i];
 
     gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.03, audioCtx.currentTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + 0.02);
     gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.25);
 
     osc.connect(gain);
@@ -174,7 +174,7 @@ function playVictoryMusic() {
     osc.frequency.value = notes[i];
 
     gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.02);
     gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.4);
 
     osc.connect(gain);
@@ -200,7 +200,7 @@ function beep() {
   osc.type = "square";
   osc.frequency.value = 700;
 
-  gain.gain.value = 0.05;
+  gain.gain.value = 0.2;
 
   osc.connect(gain);
   gain.connect(audio.destination);
