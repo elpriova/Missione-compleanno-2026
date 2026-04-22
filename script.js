@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const dialogues = [
   "Eleonora: Ciao! Sei pronto per la Missione?",
-  "Muoviti con le frecce.",
+  "Muoviti con le frecce. Quando sarai vicino, la lettera si illuminerà.",
   "Raccogli tutte le lettere sparse nella mappa.",
   "Premi A per raccogliere lettere vicine.",
   "Premi B per vedere un aiuto.",
@@ -312,15 +312,25 @@ document.getElementById("right").onclick = () => move(1, 0);
 // =====================
 document.addEventListener("DOMContentLoaded", () => {
 
-  document.getElementById("aBtn").onclick = () => {
-    letters.forEach(l => {
-      if (!l.got && l.active) {
-        l.got = true;
-        beep();
-        updatePhrase(l.char);
-      }
-    });
-  };
+ document.getElementById("aBtn").onclick = () => {
+
+  // 👉 SE DIALOGO ATTIVO → AVANZA DIALOGO
+  if (!gameStarted) {
+    if (!typing) {
+      showNextDialog();
+    }
+    return;
+  }
+
+  // 👉 SE GIOCO ATTIVO → RACCOGLI LETTERE
+  letters.forEach(l => {
+    if (!l.got && l.active) {
+      l.got = true;
+      beep();
+      updatePhrase(l.char);
+    }
+  });
+};
 
   document.getElementById("bBtn").onclick = () => {
     letters.forEach(l => {
