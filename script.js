@@ -209,6 +209,25 @@ function beep() {
   osc.stop(audio.currentTime + 0.1);
 }
 
+function dialogBeep() {
+
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+
+  osc.type = "square";
+  osc.frequency.value = 900; // più acuto stile Pokémon
+
+  gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.01);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  osc.start();
+  osc.stop(audioCtx.currentTime + 0.08);
+}
+
 // =====================
 // LETTERE LOGICA
 // =====================
@@ -296,10 +315,23 @@ function move(dx, dy) {
 // INPUT
 // =====================
 document.addEventListener("keydown", e => {
-  if (e.key === "ArrowUp") move(0, -1);
-  if (e.key === "ArrowDown") move(0, 1);
-  if (e.key === "ArrowLeft") move(-1, 0);
-  if (e.key === "ArrowRight") move(1, 0);
+
+  // 🎮 MOVIMENTO (solo durante il gioco)
+  if (gameStarted) {
+    if (e.key === "ArrowUp") move(0, -1);
+    if (e.key === "ArrowDown") move(0, 1);
+    if (e.key === "ArrowLeft") move(-1, 0);
+    if (e.key === "ArrowRight") move(1, 0);
+  }
+
+  // 💬 DIALOGO (solo prima del gioco)
+  if (!gameStarted && (e.key === "Enter" || e.key === " ")) {
+    if (!typing) {
+      dialogBeep();
+      showNextDialog();
+    }
+  }
+
 });
 
 document.getElementById("up").onclick = () => move(0, -1);
@@ -317,6 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 👉 SE DIALOGO ATTIVO → AVANZA DIALOGO
   if (!gameStarted) {
     if (!typing) {
+      dialogBeep(); 
       showNextDialog();
     }
     return;
